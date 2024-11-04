@@ -19,7 +19,7 @@ public class TarefaModel {
     private String descricao;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id", referencedColumnName = "usuario_id", nullable = false)
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id", nullable = false)
     private UsuarioModel responsavel;
 
     private Date dataInclusao = new Date();
@@ -33,5 +33,5 @@ public class TarefaModel {
     private ComplexidadeEnum complexidade;
 
     @OneToMany(mappedBy = "tarefa", cascade = CascadeType.ALL, orphanRemoval = true)
-    private ComentariosModel comentarios;
+    private List<ComentariosModel> comentarios;
 }
