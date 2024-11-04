@@ -1,5 +1,6 @@
 package com.gestaoprojetos.controllers;
 
+import com.gestaoprojetos.models.TarefaModel;
 import com.gestaoprojetos.models.UsuarioModel;
 import com.gestaoprojetos.repositorys.TarefaRepository;
 import com.gestaoprojetos.services.TarefaService;
@@ -16,4 +17,14 @@ public class TarefaController {
     @Autowired
     TarefaService tarefaService;
 
+    @PostMapping("/tarefa/criar/tarefa")
+    public ResponseEntity criarTarefa(@RequestBody TarefaModel tarefaModel) {
+        try {
+            return ResponseEntity.ok().body(tarefaService.criarTarefa(tarefaModel));
+        } catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity.badRequest().build();
+        }
+
+    }
 }

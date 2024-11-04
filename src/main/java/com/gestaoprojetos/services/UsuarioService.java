@@ -1,5 +1,6 @@
 package com.gestaoprojetos.services;
 
+import com.gestaoprojetos.enums.TipoEnvioEmailEnum;
 import com.gestaoprojetos.models.UsuarioModel;
 import com.gestaoprojetos.repositorys.TarefaRepository;
 import com.gestaoprojetos.repositorys.UsuarioRepository;
@@ -21,7 +22,7 @@ public class UsuarioService {
 
     public UsuarioModel criarUsuario(UsuarioModel usuario) {
         try {
-            List<SimpleMailMessage> emails = emailService.enviarEmailCriacaoConta(usuario.getEmail());
+            List<SimpleMailMessage> emails = emailService.envioEmail(usuario.getEmail(), TipoEnvioEmailEnum.CRIACAO_CONTA);
 
             boolean emailEnviado = emails.stream()
                     .map(SimpleMailMessage::getTo)

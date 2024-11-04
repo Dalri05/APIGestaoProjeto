@@ -19,7 +19,7 @@ public class TarefaModel {
     private String descricao;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private UsuarioModel responsavel;
 
     private Date dataInclusao = new Date();
