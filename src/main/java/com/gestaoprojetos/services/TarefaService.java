@@ -18,10 +18,8 @@ import java.util.Objects;
 public class TarefaService {
     @Autowired
     TarefaService tarefaService;
-
     @Autowired
     EmailService emailService;
-
     @Autowired
     TarefaRepository tarefaRepository;
 
@@ -38,13 +36,16 @@ public class TarefaService {
                    return tarefa;
                }
            }
-
            return null;
 
        } catch (Exception e) {
            e.printStackTrace();
            return null;
        }
-
    }
+
+   public List<TarefaModel> listarTarefasPorUsuario(int idUsuario) {
+       return tarefaRepository.findAllByUsuarioId(idUsuario);
+   }
+
 }

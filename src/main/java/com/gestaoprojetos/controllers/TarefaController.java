@@ -6,10 +6,9 @@ import com.gestaoprojetos.repositorys.TarefaRepository;
 import com.gestaoprojetos.services.TarefaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/tarefa")
@@ -17,7 +16,7 @@ public class TarefaController {
     @Autowired
     TarefaService tarefaService;
 
-    @PostMapping("/tarefa/criar/tarefa")
+    @PostMapping("/criar")
     public ResponseEntity criarTarefa(@RequestBody TarefaModel tarefaModel) {
         try {
             return ResponseEntity.ok().body(tarefaService.criarTarefa(tarefaModel));
@@ -25,6 +24,16 @@ public class TarefaController {
             e.printStackTrace();
             return ResponseEntity.badRequest().build();
         }
-
     }
+
+    @GetMapping("/ListarTarefas/IdUsuario")
+    public List<TarefaModel> listarTarefa(@RequestParam int idUsuario) {
+        try {
+            return tarefaService.listarTarefasPorUsuario(idUsuario);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }
