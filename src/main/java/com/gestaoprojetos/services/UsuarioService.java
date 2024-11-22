@@ -14,10 +14,14 @@ import java.util.List;
 @Service
 public class UsuarioService {
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private static UsuarioRepository usuarioRepository;
 
     @Autowired
     EmailService emailService;
+
+    public static UsuarioModel getUsuarioById(int idUsuario) {
+        return usuarioRepository.findById(idUsuario).get();
+    }
 
 
     public UsuarioModel criarUsuario(UsuarioModel usuario) {

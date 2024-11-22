@@ -48,4 +48,24 @@ public class TarefaService {
        return tarefaRepository.findAllByUsuarioId(idUsuario);
    }
 
+   public void anexarTarefaUsuaurio(int idTarefa, int idUsuario) {
+       TarefaModel tarefa = tarefaRepository.findById(idTarefa).get();
+       UsuarioModel usuario = UsuarioService.getUsuarioById(idUsuario);
+
+       tarefa.setResponsavel(usuario);
+
+       tarefaRepository.save(tarefa);
+   }
+
+    public boolean isTarefaAnexadaToUsuario(int idTarefa, int idUsuario) {
+        TarefaModel tarefa = tarefaRepository.findById(idTarefa).get();
+        UsuarioModel usuario = UsuarioService.getUsuarioById(idUsuario);
+
+        if (Objects.nonNull(tarefa) && Objects.nonNull(usuario)) {
+            return tarefa.getResponsavel().equals(usuario);
+        }
+
+        return false;
+    }
+
 }

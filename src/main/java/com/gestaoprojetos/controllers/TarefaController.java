@@ -36,4 +36,24 @@ public class TarefaController {
         }
     }
 
+    @PutMapping("/anexarTarefa/{idTarefa}/{/idUsuario}")
+        public ResponseEntity anexarTarefaToUsuario(@RequestParam int idTarefa, @RequestParam int idUsuario) {
+            try {
+                tarefaService.anexarTarefaUsuaurio(idTarefa, idUsuario);
+
+                boolean isTarefaAnexada = tarefaService.isTarefaAnexadaToUsuario(idTarefa, idUsuario);
+
+                if (isTarefaAnexada)
+                    return ResponseEntity.ok().build();
+
+                return ResponseEntity.badRequest().build();
+            } catch (Exception e) {
+                e.printStackTrace();
+                return ResponseEntity.internalServerError().build();
+            }
+
+        }
+
+    }
+
 }
